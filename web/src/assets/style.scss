@@ -1,0 +1,179 @@
+@import "./variables";
+
+// reset
+* {
+  box-sizing: border-box;
+  outline: none;
+}
+html {
+  font-size: 12px;
+}
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.2rem;
+  background: #fff;
+  -webkit-font-smoothing: antialiased;
+}
+a {
+  color: #999;
+}
+p {
+  line-height: 1.5rem;
+}
+
+// color
+@each $key, $color in $colors {
+  .text-#{$key} {
+    color: $color;
+  }
+  .bg-#{$key} {
+    background-color: $color;
+  }
+}
+
+// text
+@each $var in (left, center, right) {
+  .text-#{$var} {
+    text-align: $var !important;
+  }
+}
+.text-ellipsis {
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// font
+@each $key, $size in $font-sizes {
+  .fs-#{$key} {
+    font-size: $size * $base-font-size;
+  }
+}
+
+// flex
+.d-flex {
+  display: flex;
+}
+.flex-col {
+  flex-direction: column;
+}
+.flex-1 {
+  flex: 1;
+}
+.flex-grow-1 {
+  flex-grow: 1;
+}
+.flex-wrap {
+  flex-wrap: wrap;
+}
+@each $key, $jc in $flex-jc {
+  .jc-#{$key} {
+    justify-content: $jc;
+  }
+}
+@each $key, $ai in $flex-ai {
+  .ai-#{$key} {
+    align-items: $ai;
+  }
+}
+
+// spacing
+@each $typeKey, $type in $spacing-types {
+  @each $sizeKey, $size in $spacing-sizes {
+    .#{$typeKey}-#{$sizeKey} {
+      #{$type}: $size * $spacing-base-size;
+    }
+    .#{$typeKey}x-#{$sizeKey} {
+      #{$type}-left: $size * $spacing-base-size;
+      #{$type}-right: $size * $spacing-base-size;
+    }
+    .#{$typeKey}y-#{$sizeKey} {
+      #{$type}-top: $size * $spacing-base-size;
+      #{$type}-bottom: $size * $spacing-base-size;
+    }
+    @each $directionKey, $direction in $spacing-directions {
+      .#{$typeKey}#{$directionKey}-#{$sizeKey} {
+        #{$type}-#{$direction}: $size * $spacing-base-size;
+      }
+    }
+  }
+}
+
+// w h
+.w-100 {
+  width: 100%;
+}
+.h-100 {
+  height: 100%;
+}
+
+// button
+.btn {
+  border: none;
+  border-radius: 0.2rem;
+  font-size: map-get($font-sizes, "sm") * $base-font-size;
+  padding: 0.2rem 0.6rem;
+  &.btn-lg {
+    display: flex;
+    justify-content: center;
+    background: map-get($colors, "white");
+    border: 1px solid map-get($colors, "primary");
+    padding: 0.8rem 1rem;
+    i {
+      margin-right: 0.5rem;
+    }
+  }
+}
+
+// borders
+@each $dir in (top, right, bottom, left) {
+  .border-#{$dir} {
+    border-#{$dir}: 1px solid $border-color;
+  }
+}
+
+// nav
+.nav {
+  display: flex;
+  justify-content: space-around;
+  .nav-item {
+    border-bottom: 0.2rem solid transparent;
+    padding-bottom: 0.2rem;
+    &.act {
+      color: map-get($colors, "primary");
+      border-bottom-color: map-get($colors, "primary");
+    }
+  }
+  &.nav-inverse {
+    .nav-item {
+      color: map-get($colors, "white");
+      &.act {
+        border-bottom-color: map-get($colors, "white");
+      }
+    }
+  }
+}
+
+// sprite http://www.spritecow.com/
+.sprite {
+  background: url(./images/sprite.png) no-repeat 0 0;
+  background-size: 114px 112px;
+  display: inline-block;
+  &.sprite-01 {
+    width: 23px;
+    height: 20px;
+    background-position: 63.934% 33.333%;
+  }
+  &.sprite-02 {
+    width: 23px;
+    height: 20px;
+    background-position: 93.956% 33.696%;
+  }
+  &.sprite-03 {
+    width: 23px;
+    height: 21px;
+    background-position: 63.934% 64.088%;
+  }
+}
